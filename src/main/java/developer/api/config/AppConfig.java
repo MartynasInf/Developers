@@ -4,6 +4,8 @@ import developer.api.model.Developer;
 import developer.api.model.Workplace;
 import developer.api.repository.DeveloperRepository;
 import developer.api.repository.WorkplaceRepository;
+import developer.api.kosmos.model.Train;
+import developer.api.kosmos.repository.TrainRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,7 +40,17 @@ public class AppConfig {
             //developerRepository.save(linas);
             developerRepository.save(linas);
             workplaceRepository.saveAll(workplaces);
-
+        };
+    }
+    @Bean
+    CommandLineRunner createInitialTrainData(TrainRepository trainRepository){
+        return args -> {
+            Train fastTrain = new Train("Fast train", 500, 1999);
+            trainRepository.save(fastTrain);
+            Train niceTrain = new Train("Nice train", 700, 2010);
+            trainRepository.save(niceTrain);
+            Train bulletTrain = new Train("Bullet train", 500, 2015);
+            trainRepository.save(bulletTrain);
         };
     }
 }
